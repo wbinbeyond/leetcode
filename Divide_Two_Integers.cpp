@@ -19,7 +19,7 @@ public:
         }
         int res = 0;
         while (divd >= divs) {
-            int shift = 0;
+            int shift = 1;
             while (divd >= (divs << shift)) {
                 shift++;
             }
