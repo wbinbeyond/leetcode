@@ -23,3 +23,31 @@ private:
         return left && right;
     }
 };
+
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isValidBST(TreeNode *root) {
+        TreeNode *prev = nullptr;
+        return helper(root, prev);
+    }
+    
+    //inorder traversal
+    bool helper(TreeNode* root, TreeNode*& prev) {
+        if (root == nullptr) return true;
+        if (!helper(root->left, prev)) return false;
+        if (prev != nullptr && root->val <= prev->val) return false;
+        prev = root;
+        return helper(root->right, prev);
+    }
+};
