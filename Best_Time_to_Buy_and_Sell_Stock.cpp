@@ -37,3 +37,28 @@ public:
         return maxSum;
     }
 };
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if (prices.empty()) return 0;
+        vector<int> dif(prices.size(), 0);
+        for (int i = 1; i < prices.size(); ++i) {
+            dif[i] = prices[i] - prices[i-1];
+        }
+        
+        int curSum = 0;
+        int maxSum = 0;
+        for (int j = 0; j < dif.size(); ++j) {
+            curSum += dif[j];
+            if (curSum > maxSum) {
+                maxSum = curSum;
+            }
+            if (curSum < 0) {
+                curSum = 0;
+            }
+        }
+        return maxSum;
+    }
+};
