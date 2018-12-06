@@ -16,3 +16,24 @@ public:
         return maxProfit;
     }
 };
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if (prices.empty()) return 0;
+        vector<int> dif(prices.size(), 0);
+        for (int i = 1; i < prices.size(); ++i) {
+            dif[i] = prices[i] - prices[i-1];
+        }
+        vector<int> dp(dif.size(), 0);
+        int maxSum = 0;
+        for (int j = 1; j < dif.size(); ++j) {
+            dp[j] = max(dif[j], dif[j] + dp[j-1]);
+            if (dp[j] > maxSum) {
+                maxSum = dp[j];
+            }
+        }
+        return maxSum;
+    }
+};
