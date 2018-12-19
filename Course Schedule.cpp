@@ -4,7 +4,7 @@ public:
         vector<vector<int>> graph(numCourses);
         for (const auto& p : prerequisites)
         {
-            graph[p.first].push_back(p.second);
+            graph[p.second].push_back(p.first);
         }
         
         vector<int> visit(numCourses, 0);
