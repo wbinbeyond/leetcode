@@ -50,3 +50,27 @@ private:
         return lr != -1 ? lr : rr;
     }
 };
+
+
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode*> s;
+        int counter = 0;
+        TreeNode* p = root;
+        while (p != nullptr || !s.empty())
+        {
+            if (p != nullptr) {
+                s.push(p);
+                p = p->left;
+            }
+            else {
+                p = s.top(); s.pop();
+                counter++;
+                if (counter == k) return p->val;
+                p = p->right;
+            }
+        }
+        return -1;
+    }
+};
