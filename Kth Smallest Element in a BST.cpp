@@ -32,3 +32,21 @@ private:
         inorder(node->right);
     }
 };
+
+
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        return inorder(root, k);
+    }
+
+private:
+    int inorder(TreeNode* node, int& counter) { //counter needs to be a reference of int
+        if (node == nullptr) return -1;
+        int lr = inorder(node->left, counter);
+        counter--;  // minus 1 first before checking counter
+        if (counter == 0) return node->val;
+        int rr = inorder(node->right, counter);
+        return lr != -1 ? lr : rr;
+    }
+};
