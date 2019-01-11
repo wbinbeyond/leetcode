@@ -13,7 +13,10 @@ public:
                 end = mid;
             }
         }
-        if (end * end <= x) return end;
+        // here since end is not valid case, so it is for sure start
+        // but using template, we can go with checking end first since it is finding the last number
+        // then check start
+        // if (end * end <= x) return end;
         if (start * start <= x) return start;
         return -1;
     }
