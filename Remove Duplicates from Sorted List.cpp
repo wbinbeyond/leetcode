@@ -15,9 +15,8 @@ public:
         ListNode* cur = head;
         while (cur->next) {
             if (cur->val == cur->next->val) {
-                ListNode* tmp = cur->next;
+                // this keeps the first one of the duplicates
                 cur->next = cur->next->next;
-                delete tmp;
             }
             else {
                 cur = cur->next;
@@ -37,10 +36,13 @@ public:
         head = &dummy;
         while (head->next && head->next->next) {
             if (head->next->val == head->next->next->val) {
+                // this removes all duplicates
                 // int val = head->next->val;
                 // while (head->next && head->next->val == val) {
                 //    head->next = head->next->next;
                 // }
+                
+                // this keeps the last one of the duplicates
                 head->next = head->next->next;
             }
             else {
