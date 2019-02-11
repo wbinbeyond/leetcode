@@ -2,18 +2,22 @@ class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> res;
-        vector<int> tmp;
-        backtrack(nums, 0, tmp, res);
+        vector<int> cur;
+        for (int i = 0; i <= nums.size(); ++i) {
+            dfs(nums, i, 0, cur, res);
+        }
         return res;
     }
-    void backtrack(vector<int>& nums, int start, vector<int>& tmp, vector<vector<int>>& res) {
-        res.push_back(tmp);
-        for (int i = start; i < nums.size(); ++i) {
-            // recording all subsets which include nums[i];
-            tmp.push_back(nums[i]);
-            backtrack(nums, i + 1, tmp, res);
-            // remove nums[i] from current subset, and move forward to subsets don't contain nums[i]
-            tmp.pop_back();
+    void dfs(const vector<int>& nums, int n, int s,
+             vector<int>& cur, vector<vector<int>>& res) {
+        if (n == cur.size()) {
+            res.push_back(cur); //push_back is making a copy of cur
+            return;
+        }
+        for (int i = s; i < nums.size(); ++i) {
+            cur.push_back(nums[i]);
+            dfs(nums, n, i + 1, cur, res);
+            cur.pop_back();
         }
     }
 };
