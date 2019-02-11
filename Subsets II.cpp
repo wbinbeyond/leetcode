@@ -1,21 +1,26 @@
 class Solution {
-private:
-    vector<vector<int>> subsets;
-    vector<int> subset;
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> cur;
         sort(nums.begin(), nums.end());
-        backtrack(nums, 0);
-        return subsets;
+        for (int i = 0; i <= nums.size(); ++i) {
+            dfs(nums, i, 0, cur, res);
+        }
+        return res;
     }
-    void backtrack(vector<int>& nums, int start) {
-        subsets.push_back(subset);
-        for (int i = start; i < nums.size(); ++i) {
-            if (i > start && nums[i] == nums[i-1])
+    void dfs(const vector<int>& nums, int n, int s,
+             vector<int>& cur, vector<vector<int>>& res) {
+        if (n == cur.size()) {
+            res.push_back(cur); //push_back is making a copy of cur
+            return;
+        }
+        for (int i = s; i < nums.size(); ++i) {
+            if (i > s && nums[i] == nums[i-1])
                 continue;
-            subset.push_back(nums[i]);
-            backtrack(nums, i + 1);
-            subset.pop_back();
+            cur.push_back(nums[i]);
+            dfs(nums, n, i + 1, cur, res);
+            cur.pop_back();
         }
     }
 };
