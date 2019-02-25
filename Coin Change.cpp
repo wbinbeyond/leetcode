@@ -16,7 +16,7 @@ public:
                 minCount = min(minCount, tmp + 1);
             }
         }
-        memo[amount] = minCount;
-        return memo[amount] == INT_MAX ? -1 : memo[amount];
+        memo[amount] = (minCount == INT_MAX) ? -1 : minCount;
+        return memo[amount];
     }
 };
